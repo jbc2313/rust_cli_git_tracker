@@ -1,6 +1,9 @@
 #![allow(unused)]
 use clap::Parser;
-use std::io::{Write, stdout, stdin};
+use std::io::{Write, stdout, stdin, self};
+use std::time::Duration;
+use std::thread;
+use indicatif::ProgressBar;
 
 #[derive(Parser)]
 struct Cli {
@@ -19,7 +22,15 @@ fn main() {
             println!("{}", line);
         }
     }
-
-
+    
+    let pb = ProgressBar::new(1024);
+    for _ in 0..1024 {
+        pb.inc(1);
+        thread::sleep(Duration::from_millis(4));
+    };
+    pb.finish_with_message("done!!");
+    let stdout = io::stdout();
+    let mut handle = stdout.lock();
+    writeln!(handle, "foo: {}", 23);
 
 }

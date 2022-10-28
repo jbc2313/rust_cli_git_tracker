@@ -1,0 +1,3 @@
+foo is equal to the number 2
+bar is just a bar
+and baz is the guy down the road.
